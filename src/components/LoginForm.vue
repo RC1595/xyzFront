@@ -84,7 +84,7 @@
             errorMessages: '',
             email: '',
             show4: false,
-            password: 'password',
+            password: '',
             formHasErrors: false,
             rules: {
                 required: value => !!value || 'Required.',
@@ -110,15 +110,11 @@
 
     methods: {
         submit () {
-            console.log(this.email, this.password);
+            console.log(this.email);
             axios.request({
                 method: 'POST',
                 mode : 'cors',
                 url: 'http://127.0.0.1:5000/api/login',
-                headers: {
-                    'Access-Control-Allow-Origin' : 'http://localhost:8080/' 
-                    // 'X-Api-Key' : process.env.VUE_APP_API_KEY,
-                },
                 data: {
                     email: this.email,
                     password: this.password,

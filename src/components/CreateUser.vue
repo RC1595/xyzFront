@@ -13,10 +13,10 @@
                     <Adminbox/>
                     <v-text-field
                     ref="fname"
-                    v-model="fname"
+                    v-model="fName"
                     :rules="[
-                    () => !!fname || 'This field is required',
-                    () => !!fname && fname.length <= 10 || 'First name must be less than 10 characters',
+                    () => !!fName || 'This field is required',
+                    () => !!fName && fName.length <= 10 || 'First name must be less than 10 characters',
                     userNameCheck
                     ]"
                     label="First Name"
@@ -26,11 +26,11 @@
                 ></v-text-field>
 
                 <v-text-field
-                    ref="lname"
-                    v-model="lname"
+                    ref="lName"
+                    v-model="lName"
                     :rules="[
-                    () => !!fname || 'This field is required',
-                    () => !!fname && fname.length <= 15 || 'First name must be less than 15 characters',
+                    () => !!lName || 'This field is required',
+                    () => !!lName && lName.length <= 15 || 'First name must be less than 15 characters',
                     userNameCheck
                     ]"
                     label="Last Name"
@@ -44,14 +44,68 @@
                     v-model="companyName"
                     :rules="[
                     () => !!companyName || 'This field is required',
-                    () => !!companyName && companyName.length <= 20 || 'Company Name must be less than 20 characters',
-                    userNameCheck
+                    () => !!companyName && companyName.length <= 20 || 'Company Name must be less than 20 characters'
                     ]"
                     label="Company Name"
                     placeholder="Company name"
                     counter="200"
                     required
                 ></v-text-field>
+
+                <v-text-field
+                    ref="address"
+                    v-model="address"
+                    :rules="[
+                    () => !!address || 'This field is required',
+                    () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
+                    addressCheck
+                    ]"
+                    label="Address Line"
+                    placeholder="Snowy Rock Pl"
+                    counter="25"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    ref="city"
+                    v-model="city"
+                    :rules="[() => !!city || 'This field is required', addressCheck]"
+                    label="City"
+                    placeholder="El Paso"
+                    required
+                ></v-text-field>
+                <v-text-field
+                    ref="region"
+                    v-model="region"
+                    :rules="[() => !!region || 'This field is required']"
+                    label="State/Province/Region"
+                    required
+                    placeholder="TX"
+                ></v-text-field>
+                <v-text-field
+                    ref="zip"
+                    v-model="zip"
+                    :rules="[() => !!zip || 'This field is required']"
+                    label="ZIP / Postal Code"
+                    required
+                    placeholder="79938"
+                ></v-text-field>
+                <v-autocomplete
+                    ref="country"
+                    v-model="country"
+                    :rules="[() => !!country || 'This field is required']"
+                    :items="countries"
+                    label="Country"
+                    placeholder="Select..."
+                    required
+                ></v-autocomplete>
+
+                    <v-text-field
+                    v-model="phoneNumber"
+                    :counter="7"
+                    :error-messages="errors"
+                    label="Phone Number"
+                    required
+                    ></v-text-field>
 
                     <!-- email -->
                 <v-text-field
@@ -170,19 +224,27 @@
     export default {
         name : "CreateUser",
         components : {Adminbox},
-        data: () => ({
+        data: () => ({            
+            countries: ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Anguilla', 'Antigua &amp; Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia &amp; Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote D Ivoire', 'Croatia', 'Cruise Ship', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'French West Indies', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Kyrgyz Republic', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Pierre &amp; Miquelon', 'Samoa', 'San Marino', 'Satellite', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'St Kitts &amp; Nevis', 'St Lucia', 'St Vincent', 'St. Lucia', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', `Timor L'Este`, 'Togo', 'Tonga', 'Trinidad &amp; Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks &amp; Caicos', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Virgin Islands (US)', 'Yemen', 'Zambia', 'Zimbabwe'],
             errorMessages: '',
             role: '',
-            fname: '',
-            lname: '',
+            fName: '',
+            lName: '',
             companyName: '',
+            address: '',
+            city: null,
+            region: null,
+            zip: null,
+            country: null,
             activeDate: '',
             email:'',
+            phoneNumber: '',
             password: '',
             formHasErrors: false,
             show4: false,
             activePicker: null,
             menu: false,
+            errors: '',
             rules: {
             required: value => !!value || 'Required.',
             min: v => v.length >= 8 || 'Min 8 characters',
@@ -198,12 +260,18 @@
         form () {
             return {
             role: this.role,
-            fName: this.fname,
-            lname: this.lname,
+            fName: this.fName,
+            lName: this.lName,
             companyName: this.companyName,
             activeDate: this.activeDate,
             email: this.email,
-            password: this.password
+            password: this.password,
+            phoneNumber: this.phoneNumber,
+            address: this.address,
+            city: this.city,
+            zip: this.zip,
+            country: this.country,
+            region : this.region,
             }
         },
     },
@@ -223,7 +291,12 @@
             this.errorMessages = this.fName && !this.name
             ? `Hey! I'm required`
             : ''
-
+            return true
+        },
+        addressCheck () {
+            this.errorMessages = this.address && !this.name
+            ? `Hey! I'm required`
+            : ''
             return true
         },
         //date picker vuetify
@@ -248,26 +321,31 @@
         //     if (!this.form[f]) this.formHasErrors = true,
         //     this.$refs[f].validate(true);
         // }),
-            console.log(this.bio, this.username, this.birthdate, this.email, this.password);
+
             axios.request({
                 method: 'POST',
-                url: '',
-                headers: {
-                    'Access-Control-Allow-Origin' : 'http://localhost:8080/'
-                },
+                url: 'http://127.0.0.1:5000/api/user',
                 data: {
-                    bio: this.bio,
-                    username: this.username,
-                    birthdate: this.birthdate,
-                    email: this.email,
-                    password: this.password
+                        role: this.role,
+                        fName: this.fName,
+                        lName: this.lName,
+                        companyName: this.companyName,
+                        activeDate: this.activeDate,
+                        email: this.email,
+                        password: this.password,
+                        phoneNumber: this.phoneNumber,
+                        address: this.address,
+                        city: this.city,
+                        zip: this.zip,
+                        country: this.country,
+                        region : this.region,
                 },
                 
             }).then((response) => {
                     console.log(response);
                     this.$router.push('LoginView')
             }).catch((error)=>{
-                console.alert(error+"please fill out all required fields");
+                console.warn(error+"please fill out all required fields");
             })
         }
 
