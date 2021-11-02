@@ -122,9 +122,7 @@
                 
             }).then((response) => {
                 cookies.set('token',response.data.loginToken)
-                console.log(cookies.get('token'));
                 cookies.set('userId',response.data.userId)
-                console.log(cookies.get('userId'));
                 this.$router.push('Profile')
                 console.log(response);
             }).catch((error)=>{

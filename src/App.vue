@@ -10,6 +10,9 @@
 
 <style>
 #app {
+  display: grid;
+  grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr;
+  grid-template-rows: 1fr, 1fr, 1fr, 1fr, 1fr;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,6 +21,8 @@
 }
 
 #nav {
+  grid-column-start: 1;
+  grid-column-end: 6;
   padding: 30px;
 }
 

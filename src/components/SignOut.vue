@@ -6,6 +6,7 @@
 
 <script>
 import axios from 'axios'
+import cookies from 'vue-cookies'
     export default {
         name : 'SignOut',
         methods: {
@@ -15,9 +16,15 @@ import axios from 'axios'
                     mode : 'cors',
                     url: 'http://127.0.0.1:5000/api/login',
                     data: {
-                        token: this.token,
+                        token: cookies.get('token'),
                     }
-                })
+                }).then((response) => {
+                    cookies.remove('token')
+                    cookies.remove('userId')
+                    console.log(response);
+                }).catch((error)=>{
+                    console.error(error+"error");
+            })
             }
         }
     }    
