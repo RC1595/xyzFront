@@ -1,14 +1,16 @@
 <template>
     <div>
         <CreateUser/>
+        <CreateCompany/>
     </div>
 </template>
 
 <script>
     import CreateUser from '../components/CreateUser.vue'
+    import CreateCompany from '../components/CreateCompany.vue'
     export default {
-        name : 'SuperAdmin',
-        components : CreateUser
+        name : 'Admin',
+        components : {CreateUser, CreateCompany}
     }
 </script>
 

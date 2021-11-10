@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='login'>
 <v-row justify="center">
     <v-col
         cols="12"
@@ -138,5 +138,14 @@
 </script>
 
 <style scoped>
+
+.login {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    justify-items: center;
+    align-items: center;
+}
 
 </style>

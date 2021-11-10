@@ -15,18 +15,12 @@
 </script>
 
 <style scoped>
-.home{
-  grid-column-start: 3;
-  grid-column-end: 6;
-  grid-row-start: 2;
-  grid-row-end: 5;
-  justify-items: center;
-  align-items: center;
-}
+
 .home h1 {
-  grid-column-start: 0;
+  grid-column-start: 2;
   grid-column-end: 4;
   padding-bottom: 2em;
+
 }
 
 
