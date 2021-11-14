@@ -7,7 +7,7 @@
         md="8"
         lg="6"
     >
-        <v-card ref="form">
+        <v-card class="loginForm" ref="form">
         <v-card-text>
             <v-text-field
             ref="email"
@@ -113,7 +113,7 @@
             console.log(this.email);
             axios.request({
                 method: 'POST',
-                mode : 'cors',
+                mode : 'CORS',
                 url: 'http://127.0.0.1:5000/api/login',
                 data: {
                     email: this.email,
@@ -123,7 +123,7 @@
             }).then((response) => {
                 cookies.set('token',response.data.loginToken)
                 cookies.set('userId',response.data.userId)
-                this.$router.push('Profile')
+                this.$router.push('Admin')
                 console.log(response);
             }).catch((error)=>{
                 console.error(error+"error");
@@ -140,12 +140,12 @@
 <style scoped>
 
 .login {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 3;
-    grid-row-end: 5;
-    justify-items: center;
-    align-items: center;
+    width: 55vw;
+    margin-left: 30vw;
 }
+.loginForm{
+    background-color: lightskyblue;
+}
+
 
 </style>

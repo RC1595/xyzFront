@@ -1,16 +1,24 @@
 <template>
     <div>
-        <CreateUser/>
-        <CreateCompany/>
+    <div>
+        <CreateCoBtn/><CreateUserBtn/><CreateProdBtn/>
+
+    </div>
+    <div>
+        <RentalEquipment/>
+    </div>
     </div>
 </template>
 
 <script>
-    import CreateUser from '../components/CreateUser.vue'
-    import CreateCompany from '../components/CreateCompany.vue'
+    import CreateProdBtn from '../components/CreateProdBtn.vue' 
+    import RentalEquipment from '../components/RentalEquipment.vue'
+    import CreateCoBtn from '../components/CreateCoBtn.vue'
+    import CreateUserBtn from '../components/CreateUserBtn.vue'
+
     export default {
         name : 'Admin',
-        components : {CreateUser, CreateCompany}
+        components : {RentalEquipment, CreateCoBtn, CreateUserBtn, CreateProdBtn}
     }
 </script>
 

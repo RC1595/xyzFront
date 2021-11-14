@@ -69,13 +69,80 @@
                     label="Phone Number"
                     required
                 ></v-text-field>
+
+                <div data-app>
+                    <div class="mb-6">Date Active: <code>{{ activeDate || 'null' }}</code></div>
+                    <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                    >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                        v-model="activeDate"
+                        label="Active Date"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                        ></v-text-field>
+                    </template>
+                    <v-date-picker
+                        v-model="activeDate"
+                        :active-picker.sync="activePicker"
+                        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                        min="2020-01-01"
+                        @change="save"
+                    ></v-date-picker>
+                    </v-menu>
+                </div>
+                
             </v-card-text>
+                <v-divider class="mt-12"></v-divider>
+                <v-card-actions>
+                <v-btn @click="resetForm" text>
+                    Cancel
+                </v-btn>
+
+                <v-spacer></v-spacer>
+
+                <v-slide-x-reverse-transition>
+                    <v-tooltip
+                        v-if="formHasErrors"
+                        left
+                    >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            icon
+                            class="my-0"
+                            v-bind="attrs"
+                            @click="resetForm"
+                            v-on="on"
+                        >
+                        <v-icon>mdi-refresh</v-icon>
+                        </v-btn>
+                    </template>
+                    
+                    </v-tooltip>
+                </v-slide-x-reverse-transition>
+
+                <v-btn
+                    color="primary"
+                    text
+                    @click="submit">
+                    Submit
+                </v-btn>
+                </v-card-actions>
         </v-card>
 
     </div>
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         name : 'CreateCompany',
         data:() =>({
@@ -87,6 +154,11 @@
             zip : '',
             country : '',
             phoneNumber : '',
+            activeDate: '',
+            activePicker: null,
+            menu: false,
+            formHasErrors: false,
+            errors: '',
             rules: {
             required: value => !!value || 'Required.'
             }
@@ -101,6 +173,7 @@
                 zip: this.zip,
                 country: this.country,
                 phoneNumber: this.phoneNumber,
+                activeDate: this.activeDate
                 }
             },
         },
@@ -112,25 +185,43 @@
                 : ''
                 return true
             },
+            addressCheck () {
+                this.errorMessages = this.address && !this.address
+                ? `Hey! I'm required`
+                : ''
+                return true
+            },
+            save (activeDate) {
+                this.$refs.menu.save(activeDate)
+        },
             resetForm () {
                 this.errorMessages = []
                 this.formHasErrors = false
 
             Object.keys(this.form).forEach(f => {
             this.$refs[f].reset()
-            }),
+            })
+            },
+            submit () {
+                this.formHasErrors = false
+                Object.keys(this.form).forEach(f => {
+                if (!this.form[f]) this.formHasErrors = true,
+                this.$refs[f].validate(true);
+                }),
 
             axios.request({
                 method: 'POST',
-                url: 'http://127.0.0.1:5000/api/',
+                url: 'http://127.0.0.1:5000/api/company',
                 data: {
-                        role: this.role,
-                        fName: this.fName,
-                        lName: this.lName,
-                        email: this.email,
-                        password: this.password,
-                        companyName: this.companyName
-                },
+                        company: this.company,
+                        phoneNumber: this.phoneNumber,
+                        address: this.address,
+                        city: this.city,
+                        region: this.region,
+                        country: this.country,
+                        zip: this.zip,
+                        activeDate: this.activeDate
+                }
                 
             }).then((response) => {
                     console.log(response);
@@ -138,9 +229,10 @@
             }).catch((error)=>{
                 console.warn(error+"please fill out all required fields");
             })
-        },
+        }
         }
     }
+
 </script>
 
 <style scoped>
