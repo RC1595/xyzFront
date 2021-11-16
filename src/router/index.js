@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
-import About from '../views/About.vue'
+import Rental from '../views/Rental.vue'
 import CCForm from '../views/CCForm.vue'
 import CCUser from '../views/CCUser.vue'
 import CCProd from '../views/CCProd'
@@ -22,9 +22,9 @@ const routes = [
     component: Admin
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/rental',
+    name: 'Rental',
+    component: Rental
   },
   {
     path: '/ccform',
@@ -40,7 +40,7 @@ const routes = [
     path: '/ccprod',
     name: 'CCProd',
     components: CCProd
-  }
+  },
 ]
 
 const router = new VueRouter({

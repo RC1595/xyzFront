@@ -16,12 +16,13 @@
 
 <style scoped>
 
-.home h1 {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  padding-bottom: 2em;
-
+h1 {
+  margin-left:10vw;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+  margin-left: 15vw;
 }
+
 
 
 

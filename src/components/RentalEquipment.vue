@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="rental in rentals"
+        <div v-for="rental in rentals.slice().reverse()"
         :key="rental.sn">
             <v-card class="rentals">
                 <v-card-title>{{rental.companyName}}</v-card-title>

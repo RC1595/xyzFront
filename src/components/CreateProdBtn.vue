@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn @click="$router.push('CCProd')"><span>Create New Product</span></v-btn>
+        <v-btn @click="$router.push('ccprod')"><span>Create New Product</span></v-btn>
     </div>
 </template>
 

@@ -8,7 +8,9 @@
     import CreateProduct from '../components/CreateProduct.vue' 
     export default {
         name: 'CCProd',
-        components: {CreateProduct}
+        components: {
+            CreateProduct
+        }
     }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-    <div class = "createCo">
-        <v-card ref="form">
+    <div>
+        <v-card class = "createCo" ref="form">
             <v-card-text>
                 <v-text-field
                     ref="company"
@@ -237,8 +237,11 @@ import axios from 'axios'
 
 <style scoped>
 
-#createCo {
-    grid-column-start: 4;
+.createCo {
+    background-color: lightskyblue;
+    width: 40vw;
+    margin-left: 29vw;
+    margin-top:5vh;
 
 }
 

@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
+      <router-link to="/rental">New Rental</router-link> |
       <router-link to="/admin">Dashboard</router-link>
     </div>
     <router-view/>
@@ -26,6 +26,7 @@
   grid-column-start: 1;
   grid-column-end: 6;
   padding: 30px;
+  margin-right: 8vw;
 }
 
 #nav a {

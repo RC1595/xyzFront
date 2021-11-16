@@ -8,7 +8,7 @@
 <script>
   import CreateRental from '../components/CreateRental.vue'
   export default {
-    name: "About",
+    name: "Rental",
     components : {CreateRental}
   }
 </script>

@@ -1,38 +1,50 @@
 <template>
     <div>
+        <v-app>
+            <v-card class="card">
         <v-container fluid>
             <v-row align="center">
-                <div v-for="item in items" :key="item.items">
+                <div>
                     <v-col class="d-flex"
                     cols="12"
-                    sm="6">
-                        <v-select
-                        :items="item"
-                        label="Select Client"
+                    sm="12">
+                        <v-select id="client"
+                        v-model="selectedCompany"
+                        :items="company"
+                        item-text="companyId"
+                        label="Client"
                         dense
                         ></v-select>
                     </v-col>
                 </div>
                 <v-col class="d-flex"
                 cols="12"
-                sm="6">
-                    <v-select
+                sm="4">
+                    <v-select id="user"
+                    v-model="selectedUser"
                     :items="user"
-                    label="Standard"
-                    dense
-                    ></v-select>
+                    item-text="userId"
+                    label="Select User"
+                    dense>
+                    </v-select>
                 </v-col>
                 <v-col class="d-flex"
                 cols="12"
-                sm="6">
-                    <v-select
+                sm="4">
+                    <v-select id="sn"
+                    v-model="selectedSn"
                     :items="sn"
-                    label="Standard"
+                    item-text="sn"
+                    label="Equipment"
                     dense
                     ></v-select>
                 </v-col>
+                <v-btn id="btn" @click="submit">Submit</v-btn>
+                <!-- <v-btn @click="cancel">Cancel</v-btn> -->
             </v-row>
         </v-container>
+        </v-card>
+        </v-app>
     </div>
 </template>
 
@@ -42,14 +54,39 @@
     export default {
         name: 'CreateRental',
         data: () => ({
+            user: [],
+            company: [],
             sn: [],
-            items: '',
-            user: []
+            selectedUser: '',
+            selectedCompany: '',
+            selectedSn: ''
     }),
-        created(){
-            this.getCo()
+        mounted(){
+            this.getCo(),
+            this.getUser(),
+            this.getSn()
         },
         methods: {
+            submit(){
+                axios.request({
+                    method: 'POST',
+                    url: 'http://127.0.0.1:5000/api/rentals',
+                    headers: {
+                        token : cookies.get('token'),
+                    },
+                    data: {
+                        selectedSn: this.selectedSn,
+                        selectedUser: this.selectedUser,
+                        selectedCompany: this.selectedCompany
+                    }
+                    }).then((response) => {
+                    console.log(response);
+                    this.$router.push('/admin')
+                    }).catch((error)=>{
+                        console.warn(error+"please fill out all required fields");
+                    })
+            },
+                
             getCo(){
                 axios.request({
                     method: 'GET',
@@ -58,15 +95,59 @@
                         token : cookies.get('token'),
                     },
                 }).then((response) => {
-                    this.items = response.data
-                    console.log(response.data);
-                }).catch((error)=>
-                console.error(error+"error"));
+                    this.company = response.data
+                    console.log(response.data)
+                }).catch((error)=>{
+                console.error(error+"error");
+                })
+            },
+        
+            getUser(){
+                axios.request({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:5000/api/user',
+                    headers: {
+                    token : cookies.get('token'),
+                    },
+                    }).then((response) => {
+                        this.user = response.data
+                        console.log(response.data)
+                        }).catch((error) => {
+                        console.error(error+"error")
+                        })
+                },
+
+            getSn(){
+                axios.request({
+                    method:'GET',
+                    url: 'http://127.0.0.1:5000/api/equipment',
+                    headers: {
+                    token : cookies.get('token'),
+                    },
+                    }).then((response) => {
+                        this.sn = response.data
+                        console.log(response.data)
+                        }).catch((error) => {
+                        console.error(error+"error")
+                        })        
             }
         }
     }
+
 </script>
 
 <style scoped>
+.card {
+    background-color:lightskyblue;
+    height: 25vh;
+    margin-left: 20vw;
+    margin-top: 15vh;
+}
+#btn {
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+
 
 </style>

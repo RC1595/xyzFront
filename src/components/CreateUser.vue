@@ -8,7 +8,7 @@
                 md="8"
                 lg="6"
             >
-            <v-card ref="form">
+            <v-card class="user" ref="form">
                 <v-card-text>
                     <v-text-field
                     ref="fname"
@@ -265,5 +265,13 @@
 </script>
 
 <style scoped>
+
+.user {
+    background-color: lightskyblue;
+    width: 40vw;
+    margin-left: 29vw;
+    margin-top:5vh;
+
+}
 
 </style>

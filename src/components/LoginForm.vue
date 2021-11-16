@@ -1,14 +1,14 @@
-<template>
+<template id="body">
     <div class='login'>
-<v-row justify="center">
+    <v-row justify="center">
     <v-col
         cols="12"
         sm="10"
         md="8"
         lg="6"
     >
-        <v-card class="loginForm" ref="form">
-        <v-card-text>
+        <v-card class="card" ref="form">
+        <v-card-text class = "loginForm">
             <v-text-field
             ref="email"
             v-model="email"
@@ -138,13 +138,18 @@
 </script>
 
 <style scoped>
-
-.login {
-    width: 55vw;
-    margin-left: 30vw;
+.card {
+    background-color: lightslategray;
+    margin-left: 20vw;
 }
+
 .loginForm{
+    width: 50vw;
     background-color: lightskyblue;
+    margin-top: 10vh;
+}
+.login {
+    height: 100vh;
 }
 
 
