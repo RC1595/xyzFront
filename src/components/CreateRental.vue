@@ -70,7 +70,7 @@
             submit(){
                 axios.request({
                     method: 'POST',
-                    url: 'http://127.0.0.1:5000/api/rentals',
+                    url: 'http://xyzrent.ml/api/rentals',
                     headers: {
                         token : cookies.get('token'),
                     },
@@ -90,7 +90,7 @@
             getCo(){
                 axios.request({
                     method: 'GET',
-                    url: 'http://127.0.0.1:5000/api/company',
+                    url: 'http://xyzrent.ml/api/company',
                     headers: {
                         token : cookies.get('token'),
                     },
@@ -105,7 +105,7 @@
             getUser(){
                 axios.request({
                     method: 'GET',
-                    url: 'http://127.0.0.1:5000/api/user',
+                    url: 'http://xyzrent.ml/api/user',
                     headers: {
                     token : cookies.get('token'),
                     },
@@ -120,7 +120,7 @@
             getSn(){
                 axios.request({
                     method:'GET',
-                    url: 'http://127.0.0.1:5000/api/equipment',
+                    url: 'http://xyzrent.ml/api/equipment',
                     headers: {
                     token : cookies.get('token'),
                     },

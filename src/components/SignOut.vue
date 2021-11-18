@@ -14,7 +14,7 @@ import cookies from 'vue-cookies'
                 axios.request({
                     method: 'DELETE',
                     mode : 'cors',
-                    url: 'http://127.0.0.1:5000/api/login',
+                    url: 'http://xyzrent.ml/api/login',
                     data: {
                         token: cookies.get('token'),
                     }

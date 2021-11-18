@@ -211,7 +211,7 @@ import axios from 'axios'
 
             axios.request({
                 method: 'POST',
-                url: 'http://127.0.0.1:5000/api/company',
+                url: 'http://xyzrent.ml/api/company',
                 data: {
                         company: this.company,
                         phoneNumber: this.phoneNumber,

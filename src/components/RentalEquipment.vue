@@ -31,7 +31,7 @@ import cookies from 'vue-cookies'
             getRentals(){
                 axios.request({
                     method: 'GET',
-                    url: 'http://127.0.0.1:5000/api/rentals',
+                    url: 'http://xyzrent.ml/api/rentals',
                     headers: {
                         token : cookies.get('token'),
                     },

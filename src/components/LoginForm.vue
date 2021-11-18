@@ -114,7 +114,7 @@
             axios.request({
                 method: 'POST',
                 mode : 'CORS',
-                url: 'http://127.0.0.1:5000/api/login',
+                url: 'http://xyzrent.ml/api/login',
                 data: {
                     email: this.email,
                     password: this.password,

@@ -126,7 +126,7 @@
 
         axios.request({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/equipment',
+            url: 'http://xyzrent.ml/api/equipment',
             data: {
                 sn: this.sn,
                 prod: this.prod,

@@ -242,7 +242,7 @@
 
             axios.request({
                 method: 'POST',
-                url: 'http://127.0.0.1:5000/api/user',
+                url: 'http://xyzrent.ml/api/user',
                 data: {
                         role: this.role,
                         fName: this.fName,
